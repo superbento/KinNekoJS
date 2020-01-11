@@ -4,7 +4,7 @@ const BaseUrl = 'http://localhost:3030/'
 
 class ApiService {
   fetchProducts () {
-    return axios.get(BaseUrl)
+    return axios.get(BaseUrl + 'api/')
   }
 
   fetchProductById (productId) {

@@ -1,32 +1,70 @@
-import React from 'react'
-import './App.css'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import MangaList from './MangaList'
-import AddManga from './AddManga'
-import EditManga from './EditManga'
+import React, { Component } from 'react'
+// import ReactDOM from 'react-dom'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
 
-function App () {
-  return (
-    <div className='container'>
-      <Router>
-        <div className='col-md-6'>
-          <h1 className='text-center' style={style}>KinNekoJS</h1>
-          <Switch>
-            <Route path='/' exact component={MangaList} />
-            <Route path='/products' component={MangaList} />
-            <Route path='/add-product' component={AddManga} />
-            <Route path='/edit-product' component={EditManga} />
+class App extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      books: []
+    }
+  }
 
-          </Switch>
+  componentDidMount () {
+    axios.defaults.headers.common.Authorization = window.localStorage.getItem('jwtToken')
+    axios.get('/api/book')
+      .then(res => {
+        this.setState({ books: res.data })
+        console.log(this.state.books)
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          this.props.history.push('/login')
+        }
+      })
+  }
+
+  logout () {
+    window.localStorage.removeItem('jwtToken')
+    window.location.reload()
+  }
+
+  render () {
+    return (
+      <div class='container'>
+        <div class='panel panel-default'>
+          <div class='panel-heading'>
+            <h3 class='panel-title'>
+              BOOK CATALOG &nbsp;
+              {window.localStorage.getItem('jwtToken') &&
+                <button class='btn btn-primary' onClick={this.logout()}>Logout</button>}
+            </h3>
+          </div>
+          <div class='panel-body'>
+            <table class='table table-stripe'>
+              <thead>
+                <tr>
+                  <th>ISBN</th>
+                  <th>Title</th>
+                  <th>Author</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.books.map(book =>
+                  <tr key={book._id}>
+                    <td><Link to={`/show/${book._id}`}>{book.isbn}</Link></td>
+                    <td>{book.title}</td>
+                    <td>{book.author}</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </Router>
-    </div>
-  )
-}
-
-const style = {
-  color: 'black',
-  margin: '10px'
+      </div>
+    )
+  }
 }
 
 export default App
