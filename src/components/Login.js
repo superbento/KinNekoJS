@@ -47,6 +47,7 @@ class Login extends Component {
             <div class='alert alert-warning alert-dismissible' role='alert'>
               {message}
             </div>}
+            <div class="box1"></div>
           <h2 class='form-signin-heading'>Please sign in</h2>
           <label for='inputEmail' class='sr-only'>Email address</label>
           <input type='email' class='form-control' placeholder='Email address' name='username' value={username} onChange={this.onChange} required />
