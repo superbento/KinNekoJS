@@ -6,9 +6,11 @@
   background-size:cover;
 }
 #test{
-  margin: auto;
-  width: 80%;
   background-color: rgb(255, 255, 255);
+  height: 100%;
+  width: 72%;
+  border-radius: 0.5%;
+  margin: auto;
 }
 .App-logo {
   height: 40vmin;
