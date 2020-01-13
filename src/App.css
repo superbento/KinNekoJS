@@ -1,7 +1,15 @@
 .App {
   text-align: center;
+  background-color: rgb(0, 0, 0);
+  background-image: url("asset\76710422_p0.jpg");
+  background-repeat:no-repeat;
+  background-size:cover;
 }
-
+#test{
+  margin: auto;
+  width: 80%;
+  background-color: rgb(255, 255, 255);
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

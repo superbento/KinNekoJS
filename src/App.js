@@ -10,10 +10,13 @@ function App () {
     <div className='App'>
       <Router>
         <div className='col-md-6'>
-          <Switch>
-            <Route path='/' exact component={Main} />
-          </Switch>
+          <div id='test'>
+            <Switch>
+              <Route path='/' exact component={Main} />
+            </Switch>
+          </div>
         </div>
+
       </Router>
     </div>
   )
