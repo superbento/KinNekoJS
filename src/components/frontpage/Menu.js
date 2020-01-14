@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
-// import Toolbar from '@material-ui/core/Toolbar'
-// import Button from '@material-ui/core/Button'
 import SearchIcon from '@material-ui/icons/Search'
 import Link from '@material-ui/core/Link'
 import { IconButton } from '@material-ui/core'
@@ -43,9 +41,9 @@ export default function Menu (props) {
           {sections.map(section => (
             <Link
               color='inherit'
+              variant='h5'
               noWrap
               key={section.title}
-              variant='body2'
               href={section.url}
               className={classes.menuLink}
             >
