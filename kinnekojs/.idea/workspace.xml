@@ -6,9 +6,7 @@
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/Manga.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Manga.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/User.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongoose.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/mangas.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/mangas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/users.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +87,7 @@
       <workItem from="1578859867742" duration="2150000" />
       <workItem from="1578862475159" duration="87000" />
       <workItem from="1578862598708" duration="4040000" />
-      <workItem from="1579013656718" duration="13589000" />
+      <workItem from="1579013656718" duration="20011000" />
     </task>
     <servers />
   </component>

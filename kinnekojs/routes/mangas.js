@@ -19,11 +19,11 @@ const router = express.Router()
 
 
 router.get('/test_add', async (req, res) => {
-    await Mangas.create('为什么我能在《死亡搁浅》的世界里逗留100小时？', '游研社： 我已经是30万赞的搁浅KOL了。 文 / 嘤肉卫星 看到这篇文章的时候，应该有不少玩家已经走上了“快递”或者“云快递”之旅了，对于《死亡搁浅》到底长什么样、怎么玩，应该也有了自己的理解。 我知道对于…')
+    await Mangas.create("testTitle","This is a test Title","This is a content",6)
     res.json('ok')
 })
 
-// 添加topic
+
 router.post('/', async (req, res) => {
 
     if (req.body.title == null) {

@@ -33,7 +33,7 @@ app.use(session({
 }))
 
 app.use('/user', users) // 使用这个路由给user
-app.use('/topics', mangas)
+app.use('/mangas', mangas)
 
 
 app.get('/', (req, res) => {
@@ -44,6 +44,6 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'public')))
+//app.use(express.static(path.join(__dirname, 'public')))
 
 module.exports = app
