@@ -1,5 +1,16 @@
 const express = require('express')
-const mongoose = require('mongoose')
+var mongoose = require('mongoose') // 引入 mongoose
+var url = "mongodb://localhost:27017/KinNeko" // 本地数据库地址
+mongoose.connect(url)
+
+var db = mongoose.connection
+
+db.on('error', console.error.bind(console, 'connection error:'))
+db.once('open', function() {
+    console.log("Successful connection to "+url)
+})
+
+
 
 const User = require('../models/User.js')
 const Mangas = require('../models/Manga')

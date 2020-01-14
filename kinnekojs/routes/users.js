@@ -6,8 +6,10 @@ const User = require('../models/User.js') // User类
 const router = express.Router()
 
 const users = []
-users.push({ id: '1', login: 'biao', name: 'biao', password: '12345' })
-users.push({ id: '2', login: 'shuo', name: 'xiage', password: '12345' })
+
+//users.push({ id: '1', login: 'biao', name: 'biao', password: '12345' })
+//users.push({ id: '2', login: 'shuo', name: 'xiage', password: '12345' })
+
 router.post('/login', (req, res) => {
   const { login, password } = req.body // fields from the POST request
   if (req.session.userId) { // if userId has already been defined

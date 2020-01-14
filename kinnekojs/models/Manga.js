@@ -1,5 +1,12 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+var url = "mongodb://localhost:27017/KinNeko" // 本地数据库地址
+mongoose.connect(url)
+var db = mongoose.connection
+db.on('error', console.error.bind(console, 'connection error:'))
+db.once('open', function() {
+    console.log("Successful connection to "+url)
+})
 
 var mangaSchema = new Schema({
     author: { type: String, require: true },

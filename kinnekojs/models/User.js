@@ -1,5 +1,12 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+var url = "mongodb://localhost:27017/KinNeko" // 本地数据库地址
+mongoose.connect(url)
+var db = mongoose.connection
+db.on('error', console.error.bind(console, 'connection error:'))
+db.once('open', function() {
+    console.log("Successful connection to "+url)
+})
 
 var userSchema = new Schema({
     username: { type: String, required: true },
@@ -10,8 +17,6 @@ const User = mongoose.model('User', userSchema)
 
 module.exports.find = async function () {
     try {
-        const username = 'qq'
-        const password = '123'
         const user = await User.find({ username: username, password: password })
         return { user: user, error: '' }
     } catch (err) {
@@ -31,12 +36,17 @@ module.exports.findOne = async function (username) {
 
 module.exports.insert = async function (username, password) {
     try {
+        if(module.exports.findOne(username)==null){
         const user = new User({
             username: username,
             password: password
         })
         await user.save()
         return { user: user, error: '' }
+        }
+        else{
+            return {error: 'user is exist' }
+        }
     } catch (err) {
         console.log(err)
         return { user: null, error: 'can not create the user, error: ' + err }
