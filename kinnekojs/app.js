@@ -1,54 +1,53 @@
-var createError = require('http-errors')
 var express = require('express')
+var session = require('express-session')
+
 var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
-const cors = require('cors');
 
-var indexRouter = require('./routes/index')
-var usersRouter = require('./routes/users')
+const users = require('./routes/users.js')
+
+const topic = require('./routes/mangas')
+
+const bodyParser = require('body-parser') // pour parser les requêtes POST
+
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/tp4')
 
 var app = express()
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'pug')
-
-/*app.all('*', function (req, res, next) {
+// 允许跨域
+app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers',
       'Content-Type,Content-Length, Authorization, Accept,X-Requested-With')
   res.header('Access-Control-Allow-Methods',
       'PUT,POST,GET,DELETE,OPTIONS')
   res.header('X-Powered-By', ' 3.2.1')
-  if (req.method == 'OPTIONS') res.send(200)
+  if (req.method == 'OPTIONS') res.send(200)/* 让options请求快速返回 */
   else next()
-})*/
+})
 
-app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false })) // for simple form posts
+app.use(bodyParser.json()) // for API requests
+
+app.use(session({
+  secret: 'mydirtylittlesecret',
+  name: 'sessId'
+}))
+
+app.use('/user', users) // 使用这个路由给user
+app.use('/topics', topic)
+
+
+app.get('/', (req, res) => {
+  res.send('ok')
+})
+
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
-
-app.use('/', indexRouter)
-app.use('/users', usersRouter)
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404))
-})
-
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message
-  res.locals.error = req.app.get('env') === 'development' ? err : {}
-
-  // render the error page
-  res.status(err.status || 500)
-  res.render('error')
-})
 
 module.exports = app
