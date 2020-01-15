@@ -31,25 +31,22 @@ export default class Pagec extends Component {
   componentDidMount () {
     console.log('mangaArray')
     var mangaArray = []
-    axios.get('/api/Manga')
+    axios.get('http://localhost:3001/mangas/')
       .then((result) => {
-        result.map(manga => {
+        console.log(result)
+        result.data.mangas.map(manga => {
           var mangaNode = this.createData(manga._id, manga.img, manga.title, manga.author, manga.foloNumber, manga.creatDate)
           mangaArray.push(mangaNode)
         })
         this.setState({ mangas: mangaArray })
-        console.log(mangaArray)
       })
       .catch((error) => {
         var mangaNode = this.createData(0, 'https://source.unsplash.com/random', 'QQQ', 'Elvis Presley', 60, '16 Mar, 2019')
         mangaArray.push(mangaNode)
         mangaArray.push(mangaNode)
         this.setState({ mangas: mangaArray })
-        console.log(mangaArray)
+        console.log('error' + error)
         console.log(mangaNode)
-        if (error.response.status === 401) {
-          console.log('null manga')
-        }
       })
   }
 
