@@ -14,7 +14,7 @@ var mangaSchema = new Schema({
         url: { type: String, required: false }
     }],
     comments: [{
-        content: { type: String, required: false },
+        comment: { type: String, required: false },
         date: { type: Date, default: Date.now }
     }]
 })
@@ -59,23 +59,29 @@ module.exports.find = async function () {
     }
 }
 
-module.exports.findByAuthor = async function () {
+module.exports.findByAuthor = async function (author) {
     try {
-        const mangas = await Manga.find({}).sort({ dateCreate: 'desc' }).exec()
-        return { mangas: mangas, error: '' }
+        const mangas = await Manga.find({author: author}).sort({ dateCreate: 'desc' }).exec()
+        if(mangas == ""){
+            return { mangas: mangas, status: false, error: 'mangas is null' }
+        }
+        return { mangas: mangas, status: true, error: '' }
     } catch (err) {
         console.log('can not find any manga')
-        return { mangas: null, error: 'can not find any manga' }
+        return { mangas: null, status: false, error: 'can not find any manga' }
     }
 }
 
-module.exports.findByTittle = async function () {
+module.exports.findByTitle = async function (title) {
     try {
-        const mangas = await Manga.find({}).sort({ dateCreate: 'desc' }).exec()
-        return { mangas: mangas, error: '' }
+        const mangas = await Manga.find({title: title}).sort({ dateCreate: 'desc' }).exec()
+        if(mangas == ""){
+            return { mangas: mangas, status: false, error: '' }
+        }
+        return { mangas: mangas, status: true, error: '' }
     } catch (err) {
         console.log('can not find any manga')
-        return { mangas: null, error: 'can not find any manga' }
+        return { mangas: null, status: false, error: 'can not find any manga' }
     }
 }
 
@@ -89,6 +95,17 @@ module.exports.findOne = async function (_id) {
     } catch (err) {
         console.log('can not find this topic' + _id)
         return { manga: null, status: false, error: 'can not find any manga' }
+    }
+}
+
+module.exports.updateByID = async function (_id,comment) {
+    try {
+        const manga = await Manga.updateOne({_id: _id},{$push:{comments:{comment:comment,date:Date.now()}}})
+        return { manga: manga, status: true, error: '' }
+
+    } catch (err) {
+        console.log('can not find this topic' + _id)
+        return {manga: null, status: false, error: 'can not find this manga'}
     }
 }
 

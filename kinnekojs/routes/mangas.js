@@ -19,7 +19,7 @@ const router = express.Router()
 
 
 router.get('/test_add', async (req, res) => {
-    await Mangas.create("testTitle","This is a test Title","This is a content",6)
+    await Mangas.create("testTitle2","This is a test Title2","This is a content2",6)
     res.json('ok')
 })
 
@@ -54,10 +54,41 @@ router.get('/:topicId', async (req, res) => {
     }
 })
 
+// 根据作者搜索漫画
+router.post('/searchByAuthor', async (req, res) => {
+    const result = await Mangas.findByAuthor(req.body.author)
+    if (result.status === true) {
+        res.json(result)
+    } else {
+        res.status(400).send(result)
+    }
+})
+
+// 根据标题搜索漫画
+router.post('/searchByTitle', async (req, res) => {
+    const result = await Mangas.findByTitle(req.body.title)
+    if (result.status === true) {
+        res.json(result)
+    } else {
+        res.status(400).send(result)
+    }
+})
+
 // 删除
 router.delete('/:topicId', async (req, res) => {
-    // res.json({ status: 'caonimaa' })
+
     const result = await Mangas.delete(req.params.topicId)
+    if (result.status === true) {
+        res.json({ status: 'ok' })
+    } else {
+        res.status(400).send(result)
+    }
+})
+
+//添加评论
+router.post('/:topicId/addComment', async (req, res) => {
+
+    const result = await Mangas.updateByID(req.params.topicId, req.body.comment)
     if (result.status === true) {
         res.json({ status: 'ok' })
     } else {
