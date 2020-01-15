@@ -2,7 +2,9 @@ const express = require('express')
 var mongoose = require('mongoose') // 引入 mongoose
 var url = "mongodb://localhost:27017/KinNeko" // 本地数据库地址
 mongoose.connect(url)
+
 let mangaUrl = "../Manga/915558-[GreenTeaNeko] MON GIRL 4koma [Ongoing][French]/"
+
 var db = mongoose.connection
 
 db.on('error', console.error.bind(console, 'connection error:'))
