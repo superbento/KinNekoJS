@@ -9,6 +9,7 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.1",
+    "material-ui": "^0.20.2",
     "material-ui-icons": "^1.0.0-beta.36",
     "material-ui-image": "^3.2.2",
     "react": "^16.12.0",

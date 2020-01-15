@@ -9,7 +9,7 @@ import Container from '@material-ui/core/Container'
 import Header from './Header'
 import Menu from './Menu'
 import Footer from './Footer'
-import Pagec from './Page'
+import Comic from './Comic'
 
 const sections = [
   { title: 'Comedie', url: '#' },
@@ -28,7 +28,7 @@ export default function Main () {
       <Container maxWidth='lg'>
         <Header title='KiNeKo' sections={sections} />
         <Menu sections={sections} />
-        <div><Pagec /></div>
+        <div><Comic /></div>
 
       </Container>
       <Footer title='Footer' description='Thx !!!' />

@@ -12,7 +12,7 @@ import DateRangeIcon from '@material-ui/icons/DateRange'
 import CommentIcon from '@material-ui/icons/Comment'
 import { CardActionArea, Box } from '@material-ui/core'
 import axios from 'axios'
-import ReactDOM from 'react-dom'
+// import ReactDOM from 'react-dom'
 
 export default class Pagec extends Component {
   constructor (props) {
@@ -68,7 +68,7 @@ const Rgsb = (props) => {
         {props.mangas.map(row => (
           <TableRow key={row.id}>
             <Grid container direction='row' justify='center' alignItems='center'>
-              <CardActionArea component='a' href='#'>
+              <CardActionArea component='a' href='/comic'>
                 <Card container direction='row' justify='center' alignItems='center'>
                   <Grid container direction='row' justify='space-around' alignItems='stretch'>
                     <img src={row.img} width='200' />

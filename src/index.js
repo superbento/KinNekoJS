@@ -13,6 +13,7 @@ ReactDOM.render(
   <Router>
     <div>
       <Route exact path='/' component={App} />
+      <Route path='/comic' component={App} />
       <Route path='/login' component={Login} />
       <Route path='/register' component={Register} />
 
