@@ -8,7 +8,7 @@ class Login extends Component {
   constructor () {
     super()
     this.state = {
-      username: '',
+      login: '',
       password: '',
       message: ''
     }
@@ -23,9 +23,9 @@ class Login extends Component {
   onSubmit = (e) => {
     e.preventDefault()
 
-    const { username, password } = this.state
+    const { login, password } = this.state
 
-    axios.post('/api/auth/login', { username, password })
+    axios.post('http://localhost:3001/user/login', { login, password })
       .then((result) => {
         window.localStorage.setItem('jwtToken', result.data.token)
         this.setState({ message: '' })
@@ -39,7 +39,7 @@ class Login extends Component {
   }
 
   render () {
-    const { username, password, message } = this.state
+    const { login, password, message } = this.state
     return (
       <div class='container'>
         <form class='form-signin' onSubmit={this.onSubmit}>
@@ -50,7 +50,7 @@ class Login extends Component {
             <div class="box1"></div>
           <h2 class='form-signin-heading'>Please sign in</h2>
           <label for='inputEmail' class='sr-only'>Email address</label>
-          <input type='email' class='form-control' placeholder='Email address' name='username' value={username} onChange={this.onChange} required />
+          <input type='email' class='form-control' placeholder='Email address' name='login' value={login} onChange={this.onChange} required />
           <label for='inputPassword' class='sr-only'>Password</label>
           <input type='password' class='form-control' placeholder='Password' name='password' value={password} onChange={this.onChange} required />
           <button class='btn btn-lg btn-primary btn-block' type='submit'>Login</button>
