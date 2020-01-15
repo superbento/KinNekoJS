@@ -10,7 +10,7 @@ import BookIcon from '@material-ui/icons/Book'
 import PersonIcon from '@material-ui/icons/Person'
 import DateRangeIcon from '@material-ui/icons/DateRange'
 import CommentIcon from '@material-ui/icons/Comment'
-import { CardActionArea } from '@material-ui/core'
+import { CardActionArea, Box } from '@material-ui/core'
 import axios from 'axios'
 import ReactDOM from 'react-dom'
 
@@ -35,7 +35,8 @@ export default class Pagec extends Component {
       .then((result) => {
         console.log(result)
         result.data.mangas.map(manga => {
-          var mangaNode = this.createData(manga._id, manga.img, manga.title, manga.author, manga.foloNumber, manga.creatDate)
+          console.log('sss' + manga.folio[0].MangaUrl)
+          var mangaNode = this.createData(manga._id, manga.folio[0].MangaUrl, manga.title, manga.author, manga.foloNumber, manga.creatDate)
           mangaArray.push(mangaNode)
         })
         this.setState({ mangas: mangaArray })
@@ -63,33 +64,35 @@ const Rgsb = (props) => {
   console.log(props)
   return (
     <>
-      <Grid container spacing={1}>
+      <Grid container spacing={0} direction='column' justify='space-evenly' alignItems='stretch'>
         {props.mangas.map(row => (
           <TableRow key={row.id}>
             <Grid container direction='row' justify='center' alignItems='center'>
               <CardActionArea component='a' href='#'>
                 <Card container direction='row' justify='center' alignItems='center'>
-                  <img src={row.img} width='200' />
-                  <CardContent>
-                    <Grid container spacing={2}>
-                      <Grid container direction='row' justify='center' alignItems='center'>
-                        <BookIcon fontSize='small' />
-                        <Typography component='h5' variant='h5'>{row.title}</Typography>
+                  <Grid container direction='row' justify='space-around' alignItems='stretch'>
+                    <img src={row.img} width='200' />
+                    <CardContent>
+                      <Grid container spacing={0} xs='12' direction='column' justify='space-evenly' alignItems='stretch'>
+                        <Grid container direction='row' justify='center' alignItems='center'>
+                          <BookIcon fontSize='small' />
+                          <Typography component='h5' variant='h5'>{row.title}</Typography>
+                        </Grid>
+                        <Grid container direction='row' justify='center' alignItems='center'>
+                          <PersonIcon fontSize='medieum' />
+                          <Typography variant='subtitle1' color='textSecondary'>{row.auteur}</Typography>
+                        </Grid>
+                        <Grid container direction='row' justify='center' alignItems='center'>
+                          <DateRangeIcon fontSize='medieum' />
+                          <Typography variant='subtitle1' color='textSecondary'>{row.date}</Typography>
+                        </Grid>
+                        <Grid container direction='row' justify='center' alignItems='center'>
+                          <CommentIcon fontSize='medieum' />
+                          <Typography variant='subtitle1' color='textSecondary'>{row.numofcom}</Typography>
+                        </Grid>
                       </Grid>
-                      <Grid container direction='row' justify='center' alignItems='center'>
-                        <PersonIcon fontSize='medieum' />
-                        <Typography variant='subtitle1' color='textSecondary'>{row.auteur}</Typography>
-                      </Grid>
-                      <Grid container direction='row' justify='center' alignItems='center'>
-                        <DateRangeIcon fontSize='medieum' />
-                        <Typography variant='subtitle1' color='textSecondary'>{row.date}</Typography>
-                      </Grid>
-                      <Grid container direction='row' justify='center' alignItems='center'>
-                        <CommentIcon fontSize='medieum' />
-                        <Typography variant='subtitle1' color='textSecondary'>{row.numofcom}</Typography>
-                      </Grid>
-                    </Grid>
-                  </CardContent>
+                    </CardContent>
+                  </Grid>
                 </Card>
               </CardActionArea>
             </Grid>
