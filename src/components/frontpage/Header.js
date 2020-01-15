@@ -34,7 +34,7 @@ export default function Header (props) {
   return (
     <>
       <Toolbar className={classes.toolbar}>
-        <img src={Logo} width='200' />
+        <img src={Logo} width='200' herf='#' />
         <Typography
           component='h2'
           variant='h5'
