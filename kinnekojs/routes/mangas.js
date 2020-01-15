@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
     await Mangas.addCommentByID(result.mangaId,"")
     for(let i = 1; i <= req.body.folioNumber; i++ ){
         let num = i;
-        await Mangas.addCommentByID(result.mangaId, mangaUrl + num.toString().padStart(8,"0") + ".jpg")
+        await Mangas.updateByID(result.mangaId, mangaUrl + num.toString().padStart(8,"0") + ".jpg")
     }
 
     if (result.status === false) {

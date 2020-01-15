@@ -116,7 +116,7 @@ module.exports.addCommentByID = async function (_id,comment) {
 //添加照片
 module.exports.updateByID = async function (_id,mangaUrl) {
     try {
-        const manga = await Manga.updateOne({_id: _id},{$push:{folio:{mangaUrl}}})
+        const manga = await Manga.updateOne({_id: _id},{$push:{folio:{MangaUrl:mangaUrl}}})
         return { manga: manga, status: true, error: '' }
 
     } catch (err) {
