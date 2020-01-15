@@ -1,81 +1,102 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import React, { Component } from 'react'
+// import { makeStyles } from '@material-ui/core/styles'
 import TableRow from '@material-ui/core/TableRow'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
-import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
+import BookIcon from '@material-ui/icons/Book'
+import PersonIcon from '@material-ui/icons/Person'
+import DateRangeIcon from '@material-ui/icons/DateRange'
+import CommentIcon from '@material-ui/icons/Comment'
+import { CardActionArea } from '@material-ui/core'
+import axios from 'axios'
+import ReactDOM from 'react-dom'
 
-// Generate Order Data
-function createData (id, img, title, auteur, numofcom, date) {
-  return { id, img, title, auteur, numofcom, date }
-}
-const rows = [
-  createData(0, 'https://source.unsplash.com/random', 'QQQ', 'Elvis Presley', 60, '16 Mar, 2019'),
-  createData(0, 'https://source.unsplash.com/random', 'QQQ', 'Elvis Presley', 60, '16 Mar, 2019'),
-  createData(0, 'https://source.unsplash.com/random', 'QQQ', 'Elvis Presley', 60, '16 Mar, 2019'),
-  createData(0, 'https://source.unsplash.com/random', 'QQQ', 'Elvis Presley', 60, '16 Mar, 2019'),
-  createData(0, 'https://source.unsplash.com/random', 'QQQ', 'Elvis Presley', 60, '16 Mar, 2019'),
-  createData(0, 'https://source.unsplash.com/random', 'QQQ', 'Elvis Presley', 60, '16 Mar, 2019'),
-  createData(0, 'https://source.unsplash.com/random', 'QQQ', 'Elvis Presley', 60, '16 Mar, 2019')
-]
-
-const useStyles = makeStyles(theme => ({
-  card: {
-    display: 'flex'
-    // margin: 30
-  },
-  details: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  content: {
-    flex: '1 0 auto'
-  },
-  cover: {
-    width: 300
-  },
-  playIcon: {
-    height: 38,
-    width: 38
-  },
-  items: {
-    marginTop: 30
+export default class Pagec extends Component {
+  constructor (props) {
+    super(props)
+    console.log('mangaArray')
+    this.state = {
+      mangas: [],
+      message: null
+    }
   }
-}))
 
-export default function Orders () {
-  const classes = useStyles()
+  createData (id, img, title, auteur, numofcom, date) {
+    return { id, img, title, auteur, numofcom, date }
+  }
+
+  componentDidMount () {
+    console.log('mangaArray')
+    var mangaArray = []
+    axios.get('/api/Manga')
+      .then((result) => {
+        result.map(manga => {
+          var mangaNode = this.createData(manga._id, manga.img, manga.title, manga.author, manga.foloNumber, manga.creatDate)
+          mangaArray.push(mangaNode)
+        })
+        this.setState({ mangas: mangaArray })
+        console.log(mangaArray)
+      })
+      .catch((error) => {
+        var mangaNode = this.createData(0, 'https://source.unsplash.com/random', 'QQQ', 'Elvis Presley', 60, '16 Mar, 2019')
+        mangaArray.push(mangaNode)
+        mangaArray.push(mangaNode)
+        this.setState({ mangas: mangaArray })
+        console.log(mangaArray)
+        console.log(mangaNode)
+        if (error.response.status === 401) {
+          console.log('null manga')
+        }
+      })
+  }
+
+  render () {
+    console.log('mangaArray1')
+    return (
+      <div>
+        <Rgsb mangas={this.state.mangas} />
+      </div>
+    )
+  }
+}
+const Rgsb = (props) => {
+  console.log(props)
   return (
     <>
-      <Grid container spacing={1} className={classes.items}>
-        {rows.map(row => (
+      <Grid container spacing={1}>
+        {props.mangas.map(row => (
           <TableRow key={row.id}>
-            <Grid item md={12} container spacing={2}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.cover}
-                  image={row.img}
-                />
-                <div className={classes.details}>
-                  <CardContent className={classes.content}>
-                    <Typography component='h5' variant='h5'>{row.title}</Typography>
-                    <Typography variant='subtitle1' color='textSecondary'>{row.auteur}</Typography>
-                    <Typography variant='subtitle1' color='textSecondary'>{row.date}</Typography>
-                    <div>
-                      <Typography variant='subtitle1' color='textSecondary'>{row.auteur}</Typography>
-                      <Typography variant='subtitle1' color='textSecondary'>{row.numofcom}</Typography>
-                    </div>
-
+            <Grid container direction='row' justify='center' alignItems='center'>
+              <CardActionArea component='a' href='#'>
+                <Card container direction='row' justify='center' alignItems='center'>
+                  <img src={row.img} width='200' />
+                  <CardContent>
+                    <Grid container spacing={2}>
+                      <Grid container direction='row' justify='center' alignItems='center'>
+                        <BookIcon fontSize='small' />
+                        <Typography component='h5' variant='h5'>{row.title}</Typography>
+                      </Grid>
+                      <Grid container direction='row' justify='center' alignItems='center'>
+                        <PersonIcon fontSize='medieum' />
+                        <Typography variant='subtitle1' color='textSecondary'>{row.auteur}</Typography>
+                      </Grid>
+                      <Grid container direction='row' justify='center' alignItems='center'>
+                        <DateRangeIcon fontSize='medieum' />
+                        <Typography variant='subtitle1' color='textSecondary'>{row.date}</Typography>
+                      </Grid>
+                      <Grid container direction='row' justify='center' alignItems='center'>
+                        <CommentIcon fontSize='medieum' />
+                        <Typography variant='subtitle1' color='textSecondary'>{row.numofcom}</Typography>
+                      </Grid>
+                    </Grid>
                   </CardContent>
-                </div>
-              </Card>
+                </Card>
+              </CardActionArea>
             </Grid>
           </TableRow>
         ))}
-
       </Grid>
     </>
   )

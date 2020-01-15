@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 // import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
@@ -9,7 +10,7 @@ import Container from '@material-ui/core/Container'
 import Header from './Header'
 import Menu from './Menu'
 import Footer from './Footer'
-import Page from './Page'
+import Pagec from './Page'
 // const useStyles = makeStyles(theme => ({
 //   mainGrid: {
 //     marginTop: theme.spacing(3)
@@ -33,7 +34,7 @@ export default function Main () {
       <Container maxWidth='lg'>
         <Header title='KiNeKo' sections={sections} />
         <Menu sections={sections} />
-        <Page />
+        <Pagec />
       </Container>
       <Footer title='Footer' description='Thx !!!' />
     </>
