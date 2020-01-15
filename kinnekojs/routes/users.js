@@ -36,7 +36,7 @@ router.post('/register', async (req, res) => {
   let md5 = crypto.createHash("md5");
   let newPas = md5.update(req.body.password).digest("hex");
   const result = await User.insert(req.body.login, newPas)
-  res.json(result)
+  await res.json(result)
 })
 
 module.exports = router

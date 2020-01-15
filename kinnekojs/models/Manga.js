@@ -1,17 +1,18 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-var url = "mongodb://localhost:27017/KinNeko" // 本地数据库地址
+let url = "mongodb://localhost:27017/KinNeko" // 本地数据库地址
+
 mongoose.connect(url)
 
 
 
-var mangaSchema = new Schema({
+let mangaSchema = new Schema({
     author: { type: String, require: true },
     title: { type: String, require: true },
     content: { type: String, required: true },
     folioNumber: { type: String, require: true },
     folio: [{
-        url: { type: String, required: false }
+        MangaUrl: { type: String, required: false }
     }],
     comments: [{
         comment: { type: String, required: false },
@@ -21,7 +22,7 @@ var mangaSchema = new Schema({
 
 const Manga = mongoose.model('Manga', mangaSchema)
 
-module.exports.create = async function (author, title, content, folioNumber, ) {
+module.exports.create = async function (author, title, content, folioNumber) {
 
     try {
         const manga = new Manga({
@@ -113,9 +114,9 @@ module.exports.addCommentByID = async function (_id,comment) {
 }
 
 //添加照片
-module.exports.updateByID = async function (_id,url) {
+module.exports.updateByID = async function (_id,mangaUrl) {
     try {
-        const manga = await Manga.updateOne({_id: _id},{$push:{folio:{url}}})
+        const manga = await Manga.updateOne({_id: _id},{$push:{folio:{mangaUrl}}})
         return { manga: manga, status: true, error: '' }
 
     } catch (err) {

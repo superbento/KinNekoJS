@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-var url = "mongodb://localhost:27017/KinNeko" // 本地数据库地址
+let url = "mongodb://localhost:27017/KinNeko" // 本地数据库地址
 mongoose.connect(url)
 
 
-var userSchema = new Schema({
+let userSchema = new Schema({
     username: { type: String, required: true, unique :true},
     password: { type: String, required: true }
 })
