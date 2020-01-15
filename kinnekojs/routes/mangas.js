@@ -88,7 +88,18 @@ router.delete('/:topicId', async (req, res) => {
 //添加评论
 router.post('/:topicId/addComment', async (req, res) => {
 
-    const result = await Mangas.updateByID(req.params.topicId, req.body.comment)
+    const result = await Mangas.addCommentByID(req.params.topicId, req.body.comment)
+    if (result.status === true) {
+        res.json({ status: 'ok' })
+    } else {
+        res.status(400).send(result)
+    }
+})
+
+//添加漫画
+router.post('/:topicId/addMangaPage', async (req, res) => {
+
+    const result = await Mangas.addCommentByID(req.params.topicId, req.body.url)
     if (result.status === true) {
         res.json({ status: 'ok' })
     } else {

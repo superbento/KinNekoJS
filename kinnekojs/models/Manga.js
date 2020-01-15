@@ -21,7 +21,7 @@ var mangaSchema = new Schema({
 
 const Manga = mongoose.model('Manga', mangaSchema)
 
-module.exports.create = async function (author, title, content, folioNumber) {
+module.exports.create = async function (author, title, content, folioNumber, ) {
 
     try {
         const manga = new Manga({
@@ -85,6 +85,7 @@ module.exports.findByTitle = async function (title) {
     }
 }
 
+//根据ID寻找
 module.exports.findOne = async function (_id) {
     try {
         const manga = await Manga.findOne({ _id: _id })
@@ -98,9 +99,23 @@ module.exports.findOne = async function (_id) {
     }
 }
 
-module.exports.updateByID = async function (_id,comment) {
+
+//更新评论
+module.exports.addCommentByID = async function (_id,comment) {
     try {
         const manga = await Manga.updateOne({_id: _id},{$push:{comments:{comment:comment,date:Date.now()}}})
+        return { manga: manga, status: true, error: '' }
+
+    } catch (err) {
+        console.log('can not find this topic' + _id)
+        return {manga: null, status: false, error: 'can not find this manga'}
+    }
+}
+
+//添加照片
+module.exports.updateByID = async function (_id,url) {
+    try {
+        const manga = await Manga.updateOne({_id: _id},{$push:{folio:{url}}})
         return { manga: manga, status: true, error: '' }
 
     } catch (err) {

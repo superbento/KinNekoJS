@@ -1,31 +1,29 @@
 const express = require('express')
-
-// chargement du modèle User
+const crypto = require("crypto");
 const User = require('../models/User.js') // User类
 
 const router = express.Router()
 
-const users = []
-
-//users.push({ id: '1', login: 'biao', name: 'biao', password: '12345' })
-//users.push({ id: '2', login: 'shuo', name: 'xiage', password: '12345' })
-
 router.post('/login', (req, res) => {
-  const { login, password } = req.body // fields from the POST request
+
+  let md5 = crypto.createHash("md5");
+  let newPas = md5.update(req.body.password).digest("hex");
+
   if (req.session.userId) { // if userId has already been defined
     res.status(401) //   we know that a previous login request
     res.send('you are already connected') //   has already succeeded
     return
   }
-  // else, we verify the fields against users
-  const user = users.find(u => u.login === login && u.password == password)
+
+  const user = User.findPass(req.body.login, newPas)
+
   if (user) { // if the user if found
-    req.session.userId = user.id // define the userId field of the session
+    req.session.userId = user.toString()// define the userId field of the session
     res.send('OK')
     return
   }
   res.status(401)
-  res.send('didn’t find any user matching your id and password')
+  res.send('didn’t find any user matching your id and password:'+ newPas)
 })
 
 router.get('/logout', (req, res) => {
@@ -33,9 +31,11 @@ router.get('/logout', (req, res) => {
   res.send('logout successful')
 })
 
+
 router.post('/register', async (req, res) => {
-  const { login, password } = req.body // fields from the POST request
-  const result = await User.insert(login, password)
+  let md5 = crypto.createHash("md5");
+  let newPas = md5.update(req.body.password).digest("hex");
+  const result = await User.insert(req.body.login, newPas)
   res.json(result)
 })
 
