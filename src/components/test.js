@@ -5,12 +5,15 @@ import TableRow from '@material-ui/core/TableRow'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
+import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import BookIcon from '@material-ui/icons/Book'
 import PersonIcon from '@material-ui/icons/Person'
 import DateRangeIcon from '@material-ui/icons/DateRange'
 import CommentIcon from '@material-ui/icons/Comment'
-import { CardActionArea } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
+import Icon from '@material-ui/core/Icon'
+import { CardActionArea, Box } from '@material-ui/core'
 import axios from 'axios'
 // import ReactDOM from 'react-dom'
 
@@ -70,31 +73,43 @@ const Rgsb = (props) => {
         {props.mangas.map(row => (
           <TableRow key={row.id}>
             <Grid container direction='row' justify='center' alignItems='center'>
-              <CardActionArea component='a' href='/comic'>
-                <Card container direction='row' justify='center' alignItems='center'>
-                  <img src={row.img} alt='' width='200' />
-                  <CardContent>
-                    <Grid container spacing={2}>
-                      <Grid container direction='row' justify='center' alignItems='center'>
-                        <BookIcon fontSize='small' />
-                        <Typography component='h5' variant='h5'>{row.title}</Typography>
-                      </Grid>
-                      <Grid container direction='row' justify='center' alignItems='center'>
-                        <PersonIcon fontSize='medieum' />
-                        <Typography variant='subtitle1' color='textSecondary'>{row.auteur}</Typography>
-                      </Grid>
-                      <Grid container direction='row' justify='center' alignItems='center'>
-                        <DateRangeIcon fontSize='medieum' />
-                        <Typography variant='subtitle1' color='textSecondary'>{row.date}</Typography>
-                      </Grid>
-                      <Grid container direction='row' justify='center' alignItems='center'>
-                        <CommentIcon fontSize='medieum' />
-                        <Typography variant='subtitle1' color='textSecondary'>{row.numofcom}</Typography>
-                      </Grid>
-                    </Grid>
-                  </CardContent>
-                </Card>
-              </CardActionArea>
+              <Box border={1} margin={1}>
+                <img src={row.img} alt='' width='800' />
+              </Box>
+              <Grid>
+                <Box>
+                  <Typography component='h5' variant='h5'>{row.message}</Typography>
+                </Box>
+                <Box border={1} maxHeight={500} minHeight={100}>
+                  <Grid border={1}>
+                    {/* {props.message.map(row=>(
+                      <TableRow key={row.message}>
+                        <Typography component='h5' variant='h5'>{row.message}</Typography>
+                      </TableRow>
+                    ))} */}
+                    <Typography component='h5' variant='h5'>{row.message}</Typography>
+                    <Typography component='h5' variant='h5'>111</Typography>
+                    <Typography component='h5' variant='h5'>222</Typography>
+                    <Typography component='h5' variant='h5'>333</Typography>
+                    <Typography component='h5' variant='h5'>444</Typography>
+                    <Typography component='h5' variant='h5'>444</Typography>
+                    <Typography component='h5' variant='h5'>77</Typography>
+                  </Grid>
+                  <Grid container spacing={0} padding={1}>
+                    <CommentIcon fontSize='large' />
+                    <form noValidate autoComplete='off'>
+                      <TextField id='filled-basic' label='Filled' variant='filled' />
+                    </form>
+                    <Button
+                      variant='contained'
+                      color='primary'
+                      endIcon={<Icon />}
+                    >send
+                    </Button>
+                  </Grid>
+                </Box>
+              </Grid>
+
             </Grid>
           </TableRow>
         ))}
