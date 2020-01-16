@@ -4,7 +4,7 @@ const User = require('../models/User.js') // User类
 
 const router = express.Router()
 
-router.post('/login', (req, res) => {
+router.post('/login', async(req, res) => {
   const md5 = crypto.createHash('md5')
   const newPas = md5.update(req.body.password).digest('hex')
 
@@ -14,11 +14,11 @@ router.post('/login', (req, res) => {
     return
   }
 
-  const user = User.findPass(req.body.login, newPas)
+  const user = await User.findPass(req.body.login, newPas)
 
   if (user) { // if the user if found
     req.session.userId = user.toString()// define the userId field of the session
-    res.send('OK')
+    res.send('OK'+ user)
     return
   }
   res.status(401)
