@@ -1,13 +1,12 @@
 const express = require('express')
-const crypto = require("crypto");
+const crypto = require('crypto')
 const User = require('../models/User.js') // User类
 
 const router = express.Router()
 
 router.post('/login', (req, res) => {
-
-  let md5 = crypto.createHash("md5");
-  let newPas = md5.update(req.body.password).digest("hex");
+  const md5 = crypto.createHash('md5')
+  const newPas = md5.update(req.body.password).digest('hex')
 
   if (req.session.userId) { // if userId has already been defined
     res.status(401) //   we know that a previous login request
@@ -23,7 +22,7 @@ router.post('/login', (req, res) => {
     return
   }
   res.status(401)
-  res.send('didn’t find any user matching your id and password:'+ newPas)
+  res.send('didn’t find any user matching your id and password:' + newPas)
 })
 
 router.get('/logout', (req, res) => {
@@ -31,10 +30,9 @@ router.get('/logout', (req, res) => {
   res.send('logout successful')
 })
 
-
 router.post('/register', async (req, res) => {
-  let md5 = crypto.createHash("md5");
-  let newPas = md5.update(req.body.password).digest("hex");
+  const md5 = crypto.createHash('md5')
+  const newPas = md5.update(req.body.password).digest('hex')
   const result = await User.insert(req.body.login, newPas)
   await res.json(result)
 })
