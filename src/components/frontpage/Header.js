@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography'
 // import Link from '@material-ui/core/Link'
 import Avatar from '@material-ui/core/Avatar'
 import Logo from './logo.png'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -31,6 +32,9 @@ export default function Header (props) {
   const classes = useStyles()
   const { title } = props
 
+  function handle () {
+    window.location.href = '../login'
+  }
   return (
     <>
       <Toolbar className={classes.toolbar}>
@@ -48,8 +52,8 @@ export default function Header (props) {
         <IconButton>
           <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
         </IconButton>
-        <Button variant='outlined' size='small'>
-          Sign up
+        <Button variant='outlined' size='small' onClick={handle}>
+          sign up
         </Button>
       </Toolbar>
     </>
