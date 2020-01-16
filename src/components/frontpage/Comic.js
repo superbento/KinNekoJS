@@ -78,12 +78,10 @@ const Rgsb = (props) => {
                       </TableRow>
                     ))} */}
                       <Typography component='h5' variant='h5'>{row.message}</Typography>
-                      <Typography component='h5' variant='h5'>111</Typography>
-                      <Typography component='h5' variant='h5'>222</Typography>
-                      <Typography component='h5' variant='h5'>333</Typography>
-                      <Typography component='h5' variant='h5'>444</Typography>
-                      <Typography component='h5' variant='h5'>444</Typography>
-                      <Typography component='h5' variant='h5'>77</Typography>
+                      <Typography component='h5' variant='h5'>Very GOOD</Typography>
+                      <Typography component='h5' variant='h5'>NICE</Typography>
+                      <Typography component='h5' variant='h5'>wtmsb</Typography>
+                      <Typography component='h5' variant='h5'>Thanks for sharing that manga</Typography>
                     </Grid>
                     <Grid container spacing={0} padding={1}>
                       <CommentIcon fontSize='large' />
