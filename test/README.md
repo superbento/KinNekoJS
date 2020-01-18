@@ -29,22 +29,22 @@ Définir un prototype initial
 ### le font end
 
 Login
-![image](https://github.com/superbento/KinNekoJS/blob/master/images/login.png)
+![image](https://github.com/superbento/KinNekoJS/blob/fusion/test/images/login.png)
 
 S'inscrire
-![image](https://github.com/superbento/KinNekoJS/blob/master/images/s'inscrire.png)
+![image](https://github.com/superbento/KinNekoJS/blob/fusion/test/images/s'inscrire.png)
 
 Profile
-![image](https://github.com/superbento/KinNekoJS/blob/master/images/profileé.png)
+![image](https://github.com/superbento/KinNekoJS/blob/fusion/test/images/profileé.png)
 
 Le vue de site principale
-![image](https://github.com/superbento/KinNekoJS/blob/master/images/principale.png)
+![image](https://github.com/superbento/KinNekoJS/blob/fusion/test/images/principale.png)
 
 le content de manga
-![image](https://github.com/superbento/KinNekoJS/blob/master/images/content.png)
+![image](https://github.com/superbento/KinNekoJS/blob/fusion/test/images/content.png)
 
 ### le back end
 
-![image](https://github.com/superbento/KinNekoJS/blob/master/images/admin1.png)
+![image](https://github.com/superbento/KinNekoJS/blob/fusion/test/images/admin1.png)
 
-![image](https://github.com/superbento/KinNekoJS/blob/master/images/admin2.png)
+![image](https://github.com/superbento/KinNekoJS/blob/fusion/test/images/admin2.png)
